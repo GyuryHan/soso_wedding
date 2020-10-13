@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO MP_MEMBER(USERID
+							 ,USERPASS
+							 ,USERNAME
+							 ,BIRTH
+							 ,EMAIL
+							 ,PHONE
+							 ,GENDER
+							 ,OADDRESS
+							 ,ADDRESS
+							 ,DETAILADDRESS
+							 ,VERIFY
+							 		)
+		VALUES(#{userId},
+			   #{userPass,jdbcType=VARCHAR},
+			   #{userName,jdbcType=VARCHAR},
+			   #{birth ,jdbcType=VARCHAR},
+			   #{email,jdbcType=VARCHAR},
+			   #{phone,jdbcType=VARCHAR},
+			   #{gender,jdbcType=VARCHAR},
+			   #{oaddress,jdbcType=VARCHAR},
+			   #{address,jdbcType=VARCHAR},
+			   #{detailaddress,jdbcType=VARCHAR},
+			   #{verify,jdbcType=VARCHAR}
+			   )
+    </insert>
+    
+    <!-- 로그인 -->
+	<select id="signin" resultType="kr.co.vo.MemberVO">
+		SELECT *
+		  FROM MP_MEMBER
+		 WHERE USERID = #{userId}
+		 <!--  AND USERPASS = #{userPass} -->
+	</select>
+	
+	
+	<!-- 회원정보 수정 -->
+	<update id="memberUpdate">
+		UPDATE MP_MEMBER SET 
+		<!-- USERPASS = #{userPass}, -->
+		PHONE = #{phone},
+		USERPASS = #{userPass},
+		ADDRESS = #{address},
+		OADDRESS = #{oaddress},
+		DETAILADDRESS = #{detailaddress},
+		EMAIL = #{email}
+		WHERE USERID = #{userId}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+	
+		DELETE FROM MP_MEMBER
+		WHERE USERID = #{userId}
+		 <!--  AND USERPASS = #{userPass} --> 
+	</delete>
+	
+	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*) FROM MP_MEMBER
+		WHERE USERID = #{userId}
+		  AND USERPASS = #{userPass}
+	</select>
+	
+		<!-- 아이디 중복 체크 -->
+	<select id="checkOverId" parameterType="String" resultType="int">
+		select count(*) from mp_member where userId = #{userId}
+	</select>
+	
+	<!-- 이메일 중복 검사 -->
+	<select id="check_email" parameterType="String" resultType="int">
+		select count(*) from mp_member where email = #{email}
+	</select>
+	
+	<!-- 체크 -->
+   <select id="checkPw" resultType="int">
+      select count(*) from mp_member
+      where userId = #{userId} AND
+      userPass = #{userPass}
+   </select>
+	
+</mapper>

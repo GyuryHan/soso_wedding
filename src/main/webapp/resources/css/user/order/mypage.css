@@ -1,0 +1,98 @@
+.all_wrap {
+    margin-top: 70px;
+}
+
+.nav-pills>li>a, .nav-pills>li>a:hover, .nav-pills>li>a:active, .nav-pills>li>a:active:focus {
+    background-color: #ffffff;
+    color: #8c8c8c;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:active, .nav-pills>li.active>a:focus {
+    background-color: #ffffff;
+    color: #262626;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.side_wrap h2 {
+    font-weight: 1000;
+    margin-bottom:  40px;
+}
+
+
+.rightWrap {
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-top: 20px;
+    /* width: auto; */
+    margin-bottom: 200px;
+}
+
+.content_wrap {
+    border: 5px solid #eff0f2;
+    /* width: 100%; */
+    padding: 20px 30px;
+    margin-bottom: 20px;
+}
+
+.content_wrap h4, .content_wrap p {
+    /* float: left; */
+    display: inline-block;
+}
+
+.content_wrap h4 {
+    width: 90px;
+    font-weight: 700;
+    color: #20232c;
+}
+
+.content_wrap p {
+    font-size: 16px;
+    color: #20232c;
+}
+
+
+
+@media (max-width: 767px) {
+
+.all_wrap {
+    margin-top: 0;
+}
+
+.nav-pills>li>a, .nav-pills>li.active>a {
+    background-color: #f5e1da;
+    border: 1px solid #dfdddd;
+    color: #8c8c8c;
+    font-weight: 600;
+}
+
+.side_wrap h2 {
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.content_wrap h4 {
+    width: 60px;
+    font-size: 14px;
+    letter-spacing: -0.8px;
+}
+
+.content_wrap {
+    padding: 10px;
+}
+
+.content_wrap p {
+    font-size: 13px;
+    letter-spacing: -0.7px;
+}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+   
+    .rightWrap {
+        margin-bottom: 270px;
+    }
+    
+
+}

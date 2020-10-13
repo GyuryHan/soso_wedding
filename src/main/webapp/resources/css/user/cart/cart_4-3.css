@@ -1,0 +1,301 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.row {
+    margin: 0;
+}
+
+.topInfo{
+    margin-top: 35px;
+}
+
+.breadcrumb>.active {
+    color: black;
+}
+
+.breadcrumb>li {
+    color: rgb(172, 172, 172);
+    font-size: 15px;
+}
+
+.breadcrumb{
+    background-color: white;
+    float: right;
+    margin-top: 20px;
+}
+
+.odTitle{
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* --- */
+
+.orderContent {
+    margin: 20px 0 245px;
+    background-color: #ffffff;
+    /* background-image: url(billBg.jpg); */
+    box-shadow: 1px 1px 6px rgb(175, 175, 175);
+    border: 1px solid #e3e4e5 ;
+    width: 100%;
+}
+
+.orderLeft {
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-left: 50px;
+}
+
+/* orderTop */
+
+.orderTop {
+    margin: 70px 0 50px;
+}
+
+.orderTop h2 {
+    font-weight: 600;
+}
+
+.orderTop p {
+    font-size: 16px;
+}
+
+#pink {
+    color: #f78c90;
+}
+
+/* orderBody    */
+
+.orderBody h5 {
+    color: #4b4b4b;
+    line-height: 20px;
+    font-weight: bold;
+    vertical-align: top;
+    margin-top: 0;
+    width: 140px;
+}
+
+.orderBody h5, .orderBody p, .orderBody ul {
+    display: inline-block;
+}
+
+.orderBody ul {
+    padding-left: 0;
+}
+
+.orderBody li {
+    list-style: none;
+    line-height: 24px;
+}
+
+.info_wrap {
+    margin: 20px 0;
+}
+
+.info_wrap span {
+    font-weight: bold;
+    color: #ECA4A6;
+}
+
+#orderNum, #accountNum {
+    font-weight: 900;
+    font-size: 15px;
+    color: #ECA4A6;
+}
+
+/* 하단버튼 2개 */
+
+.bottomBtn {
+    text-align: center;
+    padding: 0 0 70px;
+} 
+
+.btnOrder {
+    margin: 0 5px;
+    border: 1px solid #f78c90;
+    background-color: #f78c90;
+    color: white;
+    font-weight: 400;
+    border-radius: 0;
+    font-size: 16px;
+    width: 140px;
+    height: 50px;
+}
+
+.btnOrder:hover {
+    border: 1px solid #f78c90;
+    background-color: #f78c90;
+    color: white;
+}
+
+/* 우측 계산서 */
+
+.billBody img, .billBodyContent {
+    float: left;
+}
+
+
+.billBodyContent {
+    width: 160px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.order_wrap {
+   height: 280px;
+   overflow-y: auto;
+}
+
+.orderRight {
+    height: auto;
+    min-height: 250px;
+    overflow: auto;
+    padding: 20px 30px 25px;
+    background-color: #ffffff;
+    background-image: url(/resources/images/cart/billRight.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat 0 0;
+    width: 85%;
+    margin: 70px auto;
+}
+
+.billBody {
+    padding: 15px 0;
+    border-bottom: 1px solid #cecece;
+    height: 140px;
+}
+
+.billBody img {
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.billBody h5 {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.billBodyContent .glyphicon {
+    color: #bebebe;
+    float: left;
+    margin-right: 3px;
+}
+
+.billBodyContent a {
+    text-decoration: none;
+    color: #000000;
+}
+
+#storeName {
+    color: #979797;
+    font-size: 12px;
+}
+
+#orderOption {
+    margin-top: -5px;
+    color: #979797;
+    font-size: 12px;
+}
+
+/* billBottom */
+
+.billBottom {
+    height: 80px;
+    padding: 30px 0 40px;
+}
+
+#billPrice1 {
+    float: left;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#billPrice2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    float: right;
+    letter-spacing: -0.4px;
+}
+
+#billPrice3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* footer */
+
+
+@media (max-width: 767px) {
+    .breadcrumb {
+        padding: 10px;
+        float: none;
+        background-color: #f5f5f5;
+    } 
+
+    .orderContent li {
+        font-size: 15px;
+    }
+
+    .orderBody h5 {
+        width: 300px;
+    }
+
+    .orderTop {
+        margin: 30px 0 50px;
+    }
+
+    .orderLeft {
+        padding: 20px;
+    }
+
+    .orderRight {
+        margin: 0;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .billBody {
+        height: 240px;
+    }
+
+    #accountName {
+        display: block;
+        text-align: right;
+    }
+
+    .bottomBtn {
+        padding-top: 50px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .billBody {
+        height: 230px;
+    }
+
+    .orderBody h5 {
+        width: 350px;
+    }
+
+    #billPrice1 {
+        margin-right: 16px;
+    }
+
+    #billPrice2 {
+        float: left;
+    }
+
+    .billBottom {
+        padding: 20px 5px;
+    }
+
+}
+  @media (min-width: 1024px) {
+  }
+
+  @media(min-width: 1200px) {
+   
+}

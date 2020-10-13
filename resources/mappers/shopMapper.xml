@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shopMapper">
+    
+
+   <!-- 카테고리별 상품 리스트 : 1차 분류 -->
+   <select id="list_1" resultType="kr.co.vo.GoodsViewVO">
+   select
+       g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+       gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg,
+       g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,g.tnf
+           from tbl_goods g
+               inner join goods_category c
+                   on g.cateCode = c.cateCode
+                   		          
+               where g.cateCode = #{cateCode}
+                  or c.cateCodeRef = #{cateCodeRef}
+                  and g.tnf='T'
+                  order by gdsDate desc
+   </select>
+   
+   <!-- 카테고리별 상품 리스트 : 2차 분류 -->
+   <select id="list_2" resultType="kr.co.vo.GoodsViewVO">
+   select
+       g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+       gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg,
+       g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,g.tnf
+           from tbl_goods g
+               inner join goods_category c
+                   on g.cateCode = c.cateCode            
+               where g.cateCode = #{cateCode}
+                and g.tnf='T'
+               order by gdsDate desc
+   </select>
+   
+   <!-- 상품검색 -->
+   <select id="list_3" resultType="kr.co.vo.GoodsViewVO">
+   select
+       g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+       gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg,
+       g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,g.tnf
+           from tbl_goods g
+               inner join goods_category c
+                   on g.cateCode = c.cateCode
+                       
+               where g.cateCode = #{cateCode} 
+              and g.comArea = #{comArea}
+              and g.tnf='T'
+    <choose>
+                <when test="gdsPrice eq 0">
+                   and gdsPrice BETWEEN #{gdsPrice} AND 100000000
+                </when>
+                  <when test="gdsPrice eq 1">
+                   and gdsPrice  <![CDATA[<]]> 1000000
+                </when>
+                <when test="gdsPrice eq 1000000">
+                   and gdsPrice  BETWEEN #{gdsPrice} AND 2000000
+                </when>
+                <when test="gdsPrice eq 2000000 ">
+                   and gdsPrice BETWEEN #{gdsPrice} AND 3000000
+                </when>
+                <when test="gdsPrice eq 3000000 ">
+                    and gdsPrice BETWEEN #{gdsPrice} AND 5000000
+                </when>
+            </choose>
+   
+   </select>
+   
+   <!-- 아이디 체크 -->
+   <select id="replyUserIdCheck" resultType="String">
+      select userId
+         from tbl_reply
+               where repNum = #{repNum}
+   </select>
+
+   
+   <!-- 카트 담기 -->
+   <insert id="addCart">
+      insert into tbl_cart (cartNum, userId, gdsNum, cartStock)
+            values (tbl_cart_seq.nextval, #{userId}, #{gdsNum}, #{cartStock})
+   </insert>
+   
+   <!-- 카트 리스트 -->
+   <select id="cartList" resultType="kr.co.vo.CartListVO">
+      select
+          row_number() over(order by c.cartNum desc) as num,
+          c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate,
+          g.gdsName, g.gdsPrice, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress
+      from tbl_cart c
+          inner join tbl_goods g
+              on c.gdsNum = g.gdsNum    
+          where c.userId = #{userId}
+          ORDER BY C.addDate
+         
+   </select>
+   
+   <!-- 주문  -->
+   <select id="cartList2" resultType="kr.co.vo.GoodsViewVO">
+      select
+          row_number() over(order by c.cartNum desc) as num,
+          c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate,
+          g.gdsName,g.cateCode, g.gdsPrice, g.gdsStock, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,ca.cateName 
+      from tbl_cart c
+          inner join tbl_goods g
+              on c.gdsNum = g.gdsNum
+              		inner join goods_category ca
+                           on g.catecode = ca.catecode
+          where c.userId = #{userId}
+          ORDER BY C.addDate
+   </select>
+   
+   <!-- 주문 옵션 -->
+   <select id="cartList3" resultType="kr.co.vo.WeddinghalldetailVO">
+    select
+          c.cartNum, c.userId, c.gdsNum,
+          g.gdsName,g.cateCode,
+          w.h_type ,w.w_type
+      from tbl_cart c
+          inner join tbl_goods g
+              on c.gdsNum = g.gdsNum
+              		inner join tbl_goods_weddinghall w
+                           ON g.gdsNum = w.gdsNum
+          where c.userId = #{userId}
+   </select>
+   
+   <!-- 카트 삭제 -->
+   <delete id="deleteCart">
+      delete tbl_cart
+          where cartNum = #{cartNum}
+              and userId = #{userId}
+   </delete>
+   
+   <!-- 주문 정보 -->
+   <insert id="orderInfo">
+      insert into tbl_order(orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhon, amount, orderDes)
+          values(#{orderId}, #{userId}, #{orderRec}, #{userAddr1}, #{userAddr2}, #{userAddr3}, #{orderPhon}, #{amount},#{orderDes})
+   </insert>
+       
+   <!-- 주문 상세 정보 -->  
+   <insert id="orderInfo_Details">
+      insert into tbl_order_details(orderDetailsNum, orderId, gdsNum, cartStock)
+          select tbl_order_details_seq.nextval, #{orderId}, gdsNum, cartStock
+              from tbl_cart    
+   </insert>       
+          
+   <!-- 카트 비우기 -->
+   <delete id="cartAllDelete">
+      delete tbl_cart
+          where userId = #{userId}
+   </delete>
+   
+   <!-- 특정 유저의 주문 목록 -->
+   <select id="orderList" resultType="kr.co.vo.OrderVO">
+      select 
+          orderId, userId, orderRec,
+          userAddr1, userAddr2, userAddr3,
+          orderPhon, amount, orderDate, orderDes
+      from tbl_order  
+          where userId = #{userId}
+      ORDER BY orderDate desc
+   </select>
+   
+   <!-- 특정 주문 목록 -->
+   <select id="orderView" resultType="kr.co.vo.OrderListVO">
+      select 
+          o.orderId, o.userId, o.orderRec,
+          o.userAddr1, o.userAddr2, o.userAddr3,
+          o.orderPhon, o.amount, o.orderDate, o.orderDes,
+          d.orderDetailsNum, d.gdsNum, d.cartStock,
+          g.gdsName, g.gdsThumbImg, g.gdsPrice
+      from tbl_order o
+              inner join tbl_order_details d
+                  on o.orderId = d.orderId
+              inner join tbl_goods g
+                  on d.gdsNum = g.gdsNum
+          where o.userId = #{userId}
+              and o.orderId = #{orderId}
+             
+   </select>
+   
+    <!-- 주문완료  -->
+   <select id="orderdetail" resultType="kr.co.vo.GoodsViewVO">
+      select
+          g.gdsName,g.cateCode, g.gdsPrice, g.gdsStock, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,
+          o.orderId, o.gdsNum     
+      from tbl_goods g
+          inner join tbl_order_details o
+              ON g.gdsNum = o.gdsNum
+                 INNER JOIN tbl_order r
+                ON r.orderId = o.orderId
+          where r.userId  = #{userId}
+          and r.orderId = #{orderId}
+         
+   </select>
+   
+   
+</mapper>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="allsearchMapper">
+
+	<!-- 상품 검색 및 페이징 -->
+	<select id="goodsSearch" resultType="kr.co.vo.GoodsViewVO">
+	SELECT gdsNum, gdsName,cateCode,cateCodeRef,cateName,
+				 gdsDes,gdsThumbImg,address
+			FROM (
+				select	g.gdsNum, g.gdsName,g.cateCode, c.cateCodeRef, c.cateName,
+				g.gdsDes, g.gdsThumbImg,g.address,
+				ROW_NUMBER() OVER(ORDER BY g.gdsNum DESC) AS RNUM
+					from tbl_goods g inner join goods_category c on g.catecode = c.catecode
+						where g.gdsName like '%' ||	#{keyword} || '%'or
+							c.cateName like '%' || #{keyword} || '%' or
+							g.address like '%' || #{keyword} || '%' or
+							g.gdsdes like '%' || #{keyword} || '%') goods
+					WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+					ORDER BY gdsNum DESC	
+			</select>
+	
+	<select id="goodscount" resultType="int" parameterType="kr.co.vo.AllSearchCriteria">
+			<![CDATA[
+			select count(gdsNum)
+				from tbl_goods
+				where gdsNum > 0
+			]]>
+	</select>
+	
+	<!-- 자유게시판 검색 및 페이징 -->	
+	<select id="boardSearch" resultType="kr.co.vo.BoardVO">
+		SELECT BNO, TITLE, CONTENT
+			FROM (
+				SELECT BNO, TITLE, CONTENT,
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+				FROM mp_BOARD
+					where title like '%'||#{keyword}||'%' or
+					content like '%'||#{keyword}||'%') board
+				WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+				ORDER BY BNO DESC	
+	</select>
+	
+	<select id="boardcount" resultType="int" parameterType="kr.co.vo.AllSearchCriteria">
+			<![CDATA[
+			select count(bno)
+				from mp_BOARD
+				where bno > 0
+			]]>
+	</select>
+	
+	<!-- QnA 검색 및 페이징 -->
+	<select id="qnaboardSearch" resultType="kr.co.vo.QnaBoardVO">
+		SELECT BNO, TITLE, CONTENT
+			FROM (
+				SELECT BNO, TITLE, CONTENT,
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+				FROM qna_BOARD
+					where title like '%'||#{keyword}||'%' or
+					content like '%'||#{keyword}||'%') qna
+				WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+				ORDER BY BNO DESC
+	</select>
+	
+	<select id="qnacount" resultType="int" parameterType="kr.co.vo.AllSearchCriteria">
+			<![CDATA[
+			select count(bno)
+				from qna_BOARD
+				where bno > 0
+			]]>
+	</select>
+
+	<!-- 후기 검색 및 페이징 -->
+	<select id="reviewboardSearch" resultType="kr.co.vo.ReviewBoardVO">
+		SELECT BNO, TITLE, CONTENT
+			FROM (
+				SELECT BNO, TITLE, CONTENT,
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+				FROM review_BOARD
+					where title like '%'||#{keyword}||'%' or
+					content like '%'||#{keyword}||'%') review
+				WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+				ORDER BY BNO DESC
+	</select>
+
+	<select id="reviewcount" resultType="int" parameterType="kr.co.vo.AllSearchCriteria">
+			<![CDATA[
+			select count(bno)
+				from REVIEW_BOARD
+				where bno > 0
+			]]>
+	</select>
+
+	<select id ="goodsread" resultType="kr.co.vo.GoodsViewVO">
+	select
+          g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+          g.gdsImg, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress
+              from tbl_goods g
+                  inner join goods_category c
+                      on g.cateCode = c.cateCode            
+                   where g.gdsNum = #{gdsNum}
+	</select>
+
+	<select id="boardread" resultType="kr.co.vo.BoardVO">
+		SELECT BNO, HEADER, TITLE, CONTENT, WRITER, REGDATE
+			FROM MP_BOARD
+		WHERE BNO = #{bno}
+	</select>
+
+	<select id="qnaread" resultType="kr.co.vo.QnaBoardVO">
+		SELECT BNO, HEADER, TITLE, CONTENT, WRITER, REGDATE
+			FROM QnA_BOARD
+		WHERE BNO = #{bno}
+	</select>
+
+	<select id="reviewread" resultType="kr.co.vo.ReviewBoardVO">
+		SELECT BNO, HEADER, TITLE, CONTENT, WRITER, REGDATE
+				FROM review_BOARD
+		WHERE BNO = #{bno}
+	</select>
+
+	<!-- 토탈카운트 -->	
+	<select id = "goodslistcount"  resultType = "kr.co.vo.GoodsViewVO">
+		select gdsname, gdsdes, address from tbl_goods
+		where gdsname like '%'||#{keyword}||'%' or
+			gdsdes like '%'||#{keyword}||'%' or
+			address like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id = "boardlistcount"  resultType = "kr.co.vo.BoardVO">
+		select title, content from mp_board
+		where title like '%'||#{keyword}||'%' or
+			content like '%'||#{keyword}||'%'
+	</select>
+
+	<select id = "qnalistcount"  resultType = "kr.co.vo.QnaBoardVO">
+		select title, content from qna_board
+		where title like '%'||#{keyword}||'%' or
+			content like '%'||#{keyword}||'%'
+	</select>
+
+	<select id = "reviewlistcount"  resultType = "kr.co.vo.ReviewBoardVO">
+		select title, content from review_board
+		where title like '%'||#{keyword}||'%' or
+			content like '%'||#{keyword}||'%'
+	</select>
+
+
+</mapper>

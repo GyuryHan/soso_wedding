@@ -1,0 +1,153 @@
+    /* slide1*/
+     .left.carousel-control,
+    .right.carousel-control {
+      background-image: none;
+      color: #ECA4A6;
+      width: 80px;
+    }
+
+    #carouselSlide1 li {
+      background-color: #D7DBD1;   
+      border-color: #D7DBD1;   
+      width: 25px;
+      height: 10px;
+    }
+
+    #carouselSlide1 .active {
+      background-color: #ECA4A6;
+      border-color: #ECA4A6;
+    }
+
+  /* 카테고리 검색 */
+  .WeddingSearch{
+    background-color: #EADAD6;
+    padding: 5px 20px 15px;
+    text-align: center;
+  }
+  .WeddingSearch p{
+    font-size: large;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 1px gray; 
+    margin-bottom: 0;
+  }
+
+  #btnSelect1, #btnSelect2, #btnSelect3{
+    background-color: #F2EAE5;
+    width: 140px;
+    height: 30px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-weight: bold;
+  }
+  #btnSelect4{
+    margin-top: 10px;
+    width: 120px;
+    background: linear-gradient(135deg, #ECA4A6 0%, #F9D5D3 100%);
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-shadow: 1px 1px 1px gray; 
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 3px;
+  }
+
+    /* slide2 */
+    #carouselSlide2 ul {
+      left: 0.6% !important;
+      width: 100%;
+    }
+
+    #carouselSlide2 li {
+      display: inline-block;
+      width: 24%;
+    }
+
+    #carouselSlide2 img {
+      width: 100%;
+    }
+
+
+    #carouselSlide2 p {
+      font-weight: bold;
+    }
+
+    #carouselSlide2 h4 {
+      margin-top: -10px;
+      color: red;
+    }
+    .btnSlide2{
+      margin: 30px 5px 10px;
+    }
+    #btnSlide2-1,
+    #btnSlide2-2,
+    #btnSlide2-3 {
+      background-color: #F9D5D3;
+      margin-right: 5px;
+      font-weight: bold;
+    }
+
+    #btnSlide2-4 {
+      background-color: #D7DBD1;
+    }
+
+
+  /* 세부카테고리6개 썸네일 */
+  .thumb {
+    background-color: #D7DBD1;   
+    font-weight: bold;    
+    text-align: center;
+    padding: 15px 10px 0;
+    margin-bottom: 50px;
+  }
+ 
+
+  /* 주문현황 */
+  .reserveBtn {
+    background-color: #ECA4A6;
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+
+  }
+
+  /* 회원후기 */
+  .reviewBtn {
+    background-color: #99A89E;
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+
+  }
+
+  /* 반응형 */
+  @media (max-width: 767px) {
+
+  /* slide1 */
+  .slide1 .item{
+      height: 150px;
+    }
+    .left.carousel-control,
+    .right.carousel-control {
+      width: 50px;
+    }
+   /* slide2 */
+   #carouselSlide2 li {
+        width: 47%;
+        margin-right: 8px;
+      }
+
+/* slide2 */
+#carouselSlide2 li {
+  margin-right: 3px;
+}
+}
+
+@media (min-width: 992px) {
+
+/* slide2 */
+#carouselSlide2 li {
+  margin-right: 5px;
+}
+
+}

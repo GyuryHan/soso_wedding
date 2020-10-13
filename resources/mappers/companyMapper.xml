@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="companyMapper">
+    
+   <!-- 카테고리 호출 -->
+   <select id="category" resultType="kr.co.vo.CategoryVO">
+      select
+         level, cateName, cateCode, cateCodeRef
+      from goods_category
+          start with cateCodeRef is null connect by prior cateCode = cateCodeRef
+   </select>
+
+   <!-- 상품 등록 -->
+   <insert id="register2">
+      insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, 
+                        gdsImg, gdsThumbImg, comName, comSubway, comArea, oaddress, address, detailaddress, gdsImg2)
+            values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+                   #{gdsImg}, #{gdsThumbImg}, #{comName}, #{comSubway}, #{comArea}, #{oaddress}, #{address},#{detailaddress},#{gdsImg2})
+   </insert>
+   
+   <!-- 웨딩홀 상세 내용 등록 -->
+   <insert id="weddingdetail">
+    insert into tbl_goods_weddinghall(weddingDetailsNum, gdsNum, cateCode, h_type, oddnum, seat, w_type, m_menu, m_cost)
+          
+          select tbl_goods_weddinghall_seq.nextval, gdsNum, cateCode, #{h_type}, #{oddnum}, #{seat},#{w_type}, #{m_menu}, #{m_cost}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 드레스 상세 내용 등록 -->
+   <insert id="dressdetail">
+    insert into TBL_GOODS_DRESS(dressDetailsNum, gdsNum, cateCode, d_type, mater, d_size, d_concept, w_shoewh, as_wh)
+          select TBL_GOODS_DRESS_seq.nextval, gdsNum, cateCode, #{d_type}, #{mater}, #{d_size},#{d_concept}, #{w_shoewh}, #{as_wh}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 헤어/메이크업 상세 내용 등록 -->
+   <insert id="handmdetail">
+    insert into TBL_GOODS_HANDM(hairMakeupDetailsNum, gdsNum, cateCode, hair_ch, makeup_ch, nailart_wh, formula)
+          select TBL_GOODS_HANDM_seq.nextval, gdsNum, cateCode, #{hair_ch}, #{makeup_ch}, #{nailart_wh},#{formula}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 스튜디오 상세 내용 등록 -->
+   <insert id="studiodetail">
+    insert into TBL_GOODS_STUDIO(studioDetailsNum, gdsNum, cateCode, r_num, seat, cam_rent_wh, lens_rent_wh, pet_comp_wh, night_comp_wh)
+          select TBL_GOODS_STUDIO_seq.nextval, gdsNum, cateCode, #{r_num}, #{seat}, #{cam_rent_wh},#{lens_rent_wh}, #{pet_comp_wh}, #{night_comp_wh}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 스냅사진/DVD 상세 내용 등록 -->
+   <insert id="snapDvdDetail">
+    insert into TBL_GOODS_SNAPSHOT_DVD(snapshotDvdDetailsNum, gdsNum, cateCode, prod_comp, shooting_step, shooting_eq, runtime, prod_proc)
+          select TBL_GOODS_SNAPSHOT_DVD_seq.nextval, gdsNum, cateCode, #{prod_comp}, #{shooting_step}, #{shooting_eq},#{runtime}, #{prod_proc}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 예복 상세 내용 등록 -->
+   <insert id="mendressdetail">
+    insert into TBL_GOODS_MENDRESS(mendressDetailsNum, gdsNum, cateCode, prod_comp, manufacturer, mater, c_r_wh, rent_per, prod_per)
+          select TBL_GOODS_MENDRESS_seq.nextval, gdsNum, cateCode, #{prod_comp}, #{manufacturer}, #{mater},#{c_r_wh}, #{rent_per}, #{prod_per}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 한복 상세 내용 등록 -->
+   <insert id="hanbokdetail">
+    insert into TBL_GOODS_HANBOK(hanbokDetailsNum, gdsNum, cateCode, prod_comp, rent_purch_method, retrun_collect_method, fitting_cost, as_wh)
+          select TBL_GOODS_HANBOK_seq.nextval, gdsNum, cateCode, #{prod_comp}, #{rent_purch_method}, #{retrun_collect_method},#{fitting_cost},  #{as_wh}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 부케 상세 내용 등록 -->
+   <insert id="boquetdetail">
+    insert into TBL_GOODS_BOUQUET(bouquetDetailsNum, gdsNum, cateCode, prod_comp, standard, mater, color, sale_ava_time)
+          select TBL_GOODS_BOUQUET_seq.nextval, gdsNum, cateCode, #{prod_comp}, #{standard}, #{mater},#{color}, #{sale_ava_time}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 청첩장 상세 내용 등록 -->
+   <insert id="invitdetail">
+    insert into TBL_GOODS_INVIT(invitationDetailsNum, gdsNum, cateCode, prod_comp, prod_per, standard, m_invit, i_concept)
+          select TBL_GOODS_INVIT_seq.nextval, gdsNum, cateCode, #{prod_comp}, #{prod_per}, #{standard},#{m_invit}, #{i_concept}
+              from tbl_goods
+               WHERE gdsDate = (SELECT MAX(gdsDate) FROM tbl_goods)
+                           
+   </insert>
+   
+   <!-- 상품 목록 -->   
+   <!-- 
+   <select id="goodslist" resultType="com.kubg.domain.GoodsVO">
+      select
+         gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+       from tbl_goods
+           order by gdsNum desc
+   </select>
+   -->
+   
+   <select id="goodslist" resultType="kr.co.vo.GoodsViewVO">
+      select
+          g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+          g.gdsImg, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress, g.gdsImg2
+              from tbl_goods g
+                  inner join goods_category c
+                      on g.cateCode = c.cateCode
+                      order by gdsDate DESC
+   </select>
+   
+   
+   
+   
+   <!-- 상품 조회 -->
+   <!-- 
+   <select id="goodsView" resultType="com.kubg.domain.GoodsVO">
+      select gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+          from tbl_goods
+              where gdsNum = #{gdsNum}
+   </select>
+   -->
+   
+   <!-- 상품 조회 + 카테고리 조인-->
+   <select id="goodsView" resultType="kr.co.vo.GoodsViewVO">
+      select
+          g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+          g.gdsImg, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress, g.gdsImg2
+              from tbl_goods g
+                  inner join goods_category c
+                      on g.cateCode = c.cateCode            
+                   where g.gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 웨딩홀조회 -->
+   <select id="weddingView" resultType="kr.co.vo.WeddinghalldetailVO">
+      select
+         weddingDetailsNum, gdsNum, cateCode, h_type, oddnum, seat, w_type, m_menu, m_cost
+              from tbl_goods_weddinghall
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 드레스조회 -->
+   <select id="dressView" resultType="kr.co.vo.DressdetailVO">
+      select  
+         dressDetailsNum, gdsNum, cateCode, d_type, mater, d_size, d_concept, w_shoewh, as_wh
+              from TBL_GOODS_DRESS
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 헤어메이크업상세내용조회 -->
+   
+   <select id="hairmakeupView" resultType="kr.co.vo.HairMakeupdetailVO">
+      select
+         hairMakeupDetailsNum, gdsNum, cateCode, hair_ch, makeup_ch, nailart_wh, formula
+              from TBL_GOODS_HANDM
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 스튜디오상세내용조회 -->
+   <select id="studioView" resultType="kr.co.vo.StudiodetailVO">
+      select
+         studioDetailsNum, gdsNum, cateCode, r_num, seat, cam_rent_wh, lens_rent_wh, pet_comp_wh, night_comp_wh
+              from TBL_GOODS_STUDIO
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 스냅샷/DVD상세내용조회 -->
+   <select id="snapshotdvdView" resultType="kr.co.vo.SnapshotDvddetailVO">
+      select
+         snapshotDvdDetailsNum, gdsNum, cateCode, prod_comp, shooting_step, shooting_eq, runtime, prod_proc
+              from TBL_GOODS_SNAPSHOT_DVD
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 예복상세내용조회 -->
+   <select id="mendressView" resultType="kr.co.vo.MendressdetailVO">
+      select
+         mendressDetailsNum, gdsNum, cateCode, prod_comp, manufacturer, mater, c_r_wh, rent_per, prod_per
+              from TBL_GOODS_MENDRESS
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 한복상세내용조회 -->
+   <select id="hanbokView" resultType="kr.co.vo.HanbokdetailVO">
+      select
+         hanbokDetailsNum, gdsNum, cateCode, prod_comp, rent_purch_method, retrun_collect_method, fitting_cost, as_wh
+              from TBL_GOODS_HANBOK
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 부케상세내용조회 -->
+   <select id="bouquetView" resultType="kr.co.vo.BouquetdetailVO">
+      select
+         bouquetDetailsNum, gdsNum, cateCode, prod_comp, standard, mater, color, sale_ava_time
+              from TBL_GOODS_BOUQUET
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 청첩장상세내용조회 -->
+   <select id="invitView" resultType="kr.co.vo.InvitationdetailVO">
+      select
+         invitationDetailsNum, gdsNum, cateCode, prod_comp, prod_per, standard, m_invit, i_concept
+              from TBL_GOODS_INVIT
+               where gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 상품  상세내용 수정 -->
+   <update id="goodsModify">
+      update tbl_goods
+          set
+             gdsNum = #{gdsNum},
+              gdsName = #{gdsName},
+              cateCode = #{cateCode},
+              gdsPrice = #{gdsPrice}, 
+              gdsStock = #{gdsStock},
+              gdsDes = #{gdsDes},
+             comName = #{comName},
+               comSubway = #{comSubway},
+             comArea = #{comArea},
+              gdsImg = #{gdsImg},
+              gdsThumbImg = #{gdsThumbImg},
+              gdsImg2 = #{gdsImg2}
+             where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 웨딩  상세내용 수정 -->
+   <update id="weddingmodify">
+      update tbl_goods_weddinghall
+          set
+             h_type = #{h_type},
+             oddnum = #{oddnum},
+             seat = #{seat},
+             w_type = #{w_type},
+             m_menu = #{m_menu},
+             m_cost = #{m_cost}
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 드레스 상세내용 수정 -->
+   <update id="dressmodify">
+      update TBL_GOODS_DRESS
+          set
+             d_type = #{d_type}, 
+             mater = #{mater}, 
+             d_size = #{d_size},
+             d_concept = #{d_concept},
+             w_shoewh = #{w_shoewh}, 
+             as_wh = #{as_wh}
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 헤어앤드메이크업 상세내용 수정 -->
+   <update id="handmmodify">
+      update TBL_GOODS_HANDM
+          set
+               hair_ch = #{hair_ch}, 
+               makeup_ch = #{makeup_ch}, 
+               nailart_wh = #{nailart_wh}, 
+               formula = #{formula}
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 스튜디오 수정 -->
+   <update id="studiomodify">
+      update TBL_GOODS_STUDIO
+          set r_num = #{r_num}, 
+               seat = #{seat}, 
+               cam_rent_wh = #{cam_rent_wh}, 
+               lens_rent_wh = #{lens_rent_wh}, 
+               pet_comp_wh = #{pet_comp_wh}, 
+               night_comp_wh = #{night_comp_wh} 
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 스냅샷 수정 -->
+   <update id="snapshotmodify">
+      update TBL_GOODS_SNAPSHOT_DVD
+          set
+              prod_comp = ${prod_comp}, 
+              shooting_step = ${shooting_step}, 
+              shooting_eq = ${shooting_eq}, 
+              runtime = ${runtime}, 
+              prod_proc = ${prod_proc}   
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 예복 수정 -->
+   <update id="mendressmodify">
+      update TBL_GOODS_MENDRESS
+          set
+              prod_comp = ${prod_comp}, 
+              manufacturer = ${manufacturer}, 
+              mater = ${mater}, 
+              c_r_wh = ${c_r_wh}, 
+              rent_per = ${rent_per}, 
+              prod_per = ${prod_per}    
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 한복 상세내용 수정 -->
+   <update id="hanbokmodify">
+      update TBL_GOODS_HANBOK
+          set prod_comp = #{prod_comp}, 
+              rent_purch_method = #{rent_purch_method}, 
+              retrun_collect_method = #{retrun_collect_method}, 
+              fitting_cost = #{fitting_cost}, 
+              as_wh = #{as_wh}
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 부케 상세내용 수정-->
+   <update id="bouquetmodify">
+      update TBL_GOODS_BOUQUET
+          set
+              prod_comp = ${prod_comp}, 
+              standard = ${standard}, 
+              mater = ${mater}, 
+              color = ${color}, 
+              sale_ava_time = ${sale_ava_time}    
+          where gdsNum = ${gdsNum}
+   </update>
+   
+    <!-- 청첩장상세내용 수정-->
+   <update id="invitmodify">
+      update TBL_GOODS_INVIT
+          set
+              prod_comp = ${prod_comp}, 
+              prod_per = ${prod_per}, 
+              standard = ${standard}, 
+              m_invit = ${m_invit}, 
+              i_concept = ${i_concept}    
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 상품 삭제 -->
+   <delete id="goodsDelete">
+      delete
+            tbl_goods
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 웨딩홀 상세내용 삭제 -->
+   <delete id="weddingDelete">
+      delete
+            tbl_goods_weddinghall
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 드레스 상세내용 삭제 -->
+   <delete id="dressDelete">
+      delete
+            TBL_GOODS_DRESS
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 헤어메이크업 상세내용  삭제 -->
+   <delete id="hairmakeupDelete">
+      delete
+            TBL_GOODS_HANDM
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 스튜디오 삭제 -->
+   <delete id="studioDelete">
+      delete
+            TBL_GOODS_STUDIO
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 스냅사진/DVD 삭제 -->
+   <delete id="snapshotdvdDelete">
+      delete
+            TBL_GOODS_SNAPSHOT_DVD
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 예복 삭제 -->
+   <delete id="mendressDelete">
+      delete
+            TBL_GOODS_MENDRESS
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 한복 삭제 -->
+   <delete id="hanbokDelete">
+      delete
+            TBL_GOODS_HANBOK
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 부케 삭제 -->
+   <delete id="bouquetDelete">
+      delete
+            TBL_GOODS_BOUQUET
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 청첩장 삭제 -->
+   <delete id="invitDelete">
+      delete
+            TBL_GOODS_INVIT
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 모든 유저의 주문 목록 -->
+   <select id="orderList" resultType="kr.co.vo.OrderVO">
+      select 
+          orderId, userId, orderRec,
+          userAddr1, userAddr2, userAddr3,
+          orderPhon, amount, orderDate
+      from tbl_order
+   </select>
+   
+   
+   <!-- 특정 주문 목록 -->
+   <select id="orderView" resultType="kr.co.vo.OrderListVO">
+      select 
+          o.orderId, o.userId, o.orderRec,
+          o.userAddr1, o.userAddr2, o.userAddr3,
+          o.orderPhon, o.amount, o.orderDate, 
+          d.orderDetailsNum, d.gdsNum, d.cartStock,
+          g.gdsName, g.gdsThumbImg, g.gdsPrice
+      from tbl_order o
+              inner join tbl_order_details d
+                  on o.orderId = d.orderId
+              inner join tbl_goods g
+                  on d.gdsNum = g.gdsNum
+          where o.orderId = #{orderId}
+   </select>
+   
+   <!-- 상품 수량 조절 -->
+   <update id="changeStock">
+      update tbl_goods
+            set gdsStock = gdsStock - #{gdsStock}
+      where gdsNum = #{gdsNum}
+   </update>
+   
+   <!-- 상품 수량 조절 보조 :: 사용하지 않음-->
+   <select id="ChangeStock_sub" resultType="kr.co.vo.OrderDetailVO">
+      select
+         orderId, gdsNum, cartStock
+      from tbl_order_details
+          where orderId = #{orderId}
+   </select>
+       
+       
+       
+</mapper>

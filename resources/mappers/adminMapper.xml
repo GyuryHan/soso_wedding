@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+    
+   <!-- 카테고리 호출 -->
+   <select id="category" resultType="kr.co.vo.CategoryVO">
+      select
+         level, cateName, cateCode, cateCodeRef
+      from goods_category
+          start with cateCodeRef is null connect by prior cateCode = cateCodeRef
+   </select>
+
+   <!-- 상품 등록 -->
+   <insert id="register2">
+      insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, 
+                        gdsImg, gdsThumbImg, comName, comSubway, comArea, oaddress, address, detailaddress,TNF)
+            values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+                   #{gdsImg}, #{gdsThumbImg}, #{comName}, #{comSubway}, #{comArea}, #{oaddress}, #{address},#{detailaddress},'F')
+   </insert>
+ <!-- 
+   <select id="goodslist" resultType="kr.co.vo.GoodsViewVO">
+      select
+          g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+          g.gdsImg, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,g.tnf
+              from tbl_goods g
+                  inner join goods_category c
+                      on g.cateCode = c.cateCode
+   </select>
+   -->  
+   
+<select id="goodslist" resultType="kr.co.vo.GoodsViewVO" parameterType="kr.co.vo.SearchCriteria">
+SELECT g.gdsNum,g.gdsName,g.cateCode,cateCodeRef,cateName,g.gdsPrice,g.gdsStock,g.gdsDes,g.gdsDate,g.gdsImg,g.gdsThumbImg,g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,g.tnf
+ FROM
+ (SELECT g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, g.gdsPrice, g.gdsStock,g. gdsDes, g.gdsDate,
+              g.gdsImg, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress,g.tnf,
+                     ROW_NUMBER() OVER(ORDER BY g.gdsNum DESC) AS RNUM
+               FROM tbl_goods g INNER JOIN goods_category c ON g.cateCode = c.cateCode
+               WHERE 1=1 AND g.gdsNum > 0
+                  <include refid="search2"></include>
+                             ) g
+      WHERE RNUM BETWEEN #{rowStart} AND  #{rowEnd}
+      ORDER BY g.gdsnum DESC
+   </select>
+   
+   <select id="listCount2" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+      SELECT COUNT(g.gdsNum)
+         FROM tbl_goods g INNER JOIN goods_category c ON g.cateCode = c.cateCode
+         WHERE 1=1
+         
+      <include refid="search2"></include>   
+         AND g.gdsNum > 0
+   </select>
+  
+   <sql id="search2">
+      <if test="searchType != null">
+         <if test="searchType == 't'.toString()">AND g.gdsName LIKE '%' || #{keyword} || '%'</if>
+         <if test="searchType == 'c'.toString()">AND g.comName LIKE '%' || #{keyword} || '%'</if>
+         <if test="searchType == 'w'.toString()">AND c.cateName LIKE '%' || #{keyword} || '%'</if>
+         <if test="searchType == 'tc'.toString()">AND (g.gdsName LIKE '%' || #{keyword} || '%') or (g.comName LIKE  '%' || #{keyword} || '%')</if>
+      </if>
+   </sql>
+   
+   <!-- 상품 조회 -->
+   <!-- 
+   <select id="goodsView" resultType="com.kubg.domain.GoodsVO">
+      select gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+          from tbl_goods
+              where gdsNum = #{gdsNum}
+   </select>
+   -->
+   
+   <!-- 상품 조회 + 카테고리 조인-->
+   <select id="goodsView" resultType="kr.co.vo.GoodsViewVO">
+      select
+          g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+          g.gdsImg, g.gdsThumbImg, g.comName, g.comSubway, g.comArea, g.oaddress, g.address, g.detailaddress
+              from tbl_goods g
+                  inner join goods_category c
+                      on g.cateCode = c.cateCode            
+                   where g.gdsNum = #{gdsNum}
+   </select>
+   
+   <!-- 상품 수정 -->
+   <update id="goodsModify">
+      update tbl_goods
+          set
+              gdsName = #{gdsName},
+              cateCode = #{cateCode},
+              gdsPrice = #{gdsPrice}, 
+              gdsStock = #{gdsStock},
+              gdsDes = #{gdsDes},
+              gdsImg = #{gdsImg},
+              gdsThumbImg = #{gdsThumbImg},
+              comName = #{comName},
+              comSubway = #{comSubway},
+              comArea = #{comArea},
+              oaddress = #{oaddress},
+              address = #{address},
+              detailaddress = #{detailaddress},
+              
+          where gdsNum = ${gdsNum}
+   </update>
+   
+   <!-- 상품 삭제 -->
+   <delete id="goodsDelete">
+      delete
+            tbl_goods
+      where gdsNum = #{gdsNum}
+   </delete>
+   
+   <!-- 모든 유저의 주문 목록 -->
+   <select id="orderList" resultType="kr.co.vo.OrderVO">
+      select 
+          orderId, userId, orderRec,
+          userAddr1, userAddr2, userAddr3,
+          orderPhon, amount, orderDate
+      from tbl_order
+   </select>
+   
+   
+   <!-- 특정 주문 목록 -->
+   <select id="orderView" resultType="kr.co.vo.OrderListVO">
+      select 
+          o.orderId, o.userId, o.orderRec,
+          o.userAddr1, o.userAddr2, o.userAddr3,
+          o.orderPhon, o.amount, o.orderDate, 
+          d.orderDetailsNum, d.gdsNum, d.cartStock,
+          g.gdsName, g.gdsThumbImg, g.gdsPrice
+      from tbl_order o
+              inner join tbl_order_details d
+                  on o.orderId = d.orderId
+              inner join tbl_goods g
+                  on d.gdsNum = g.gdsNum
+          where o.orderId = #{orderId}
+   </select>
+   
+   <!-- 상품 수량 조절 -->
+   <update id="changeStock">
+      update tbl_goods
+            set gdsStock = gdsStock - #{gdsStock}
+      where gdsNum = #{gdsNum}
+   </update>
+   
+   <!-- 상품 수량 조절 보조 :: 사용하지 않음-->
+   <select id="ChangeStock_sub" resultType="kr.co.vo.OrderDetailVO">
+      select
+         orderId, gdsNum, cartStock
+      from tbl_order_details
+          where orderId = #{orderId}
+   </select>
+       
+    <!-- mmdddzzzzzzzzzzzzzzzzzzzzzzzzzzzㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
+   <!-- 상품 승인 된거 확인   -->
+   <select id="listPage3" resultType="kr.co.vo.GoodsViewVO">
+		SELECT * FROM MP_BOARD where TNF='T'
+	</select>
+	
+	   <!-- 상품  삭제 -->
+   <delete id="delete" parameterType="int">
+      delete
+      from
+            tbl_goods
+      where gdsNum = #{gdsNum}
+   </delete>
+   	   <!-- 상품  승인  -->
+   	<update id="update2" parameterType="kr.co.vo.GoodsViewVO">
+		UPDATE tbl_goods
+			SET TNF = 'T'
+			WHERE gdsNum = #{gdsNum}
+	</update>
+	<!-- 상품 취소 -->
+		<update id="update3" parameterType="kr.co.vo.GoodsViewVO">
+		UPDATE tbl_goods
+			SET TNF = 'F'
+			WHERE gdsNum = #{gdsNum}
+	</update>
+	<!-- 상품 승인된거 보기 -->
+		<select id="list2" resultType="kr.co.vo.GoodsViewVO">
+		SELECT * FROM tbl_goods where TNF='T'
+	</select>
+	<!-- 공지사항 -->
+<select id="notices" resultType="kr.co.vo.AdminNoticesVO" parameterType="kr.co.vo.SearchCriteria">
+    SELECT NO, TITLE,NOTICEDATE,HIT,CONTENTS,HEADER
+     FROM   (SELECT NO,TITLE,NOTICEDATE,HIT,CONTENTS,HEADER,ROW_NUMBER() OVER(ORDER BY NO DESC) AS RNUM
+             FROM TBL_NOTICES
+             WHERE 1=1 AND no>0
+                <include refid="search3"></include>
+                           ) TBL_NOTICES
+    WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+    ORDER BY NO DESC
+ </select>
+ 
+ <select id="listCount3" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+    SELECT COUNT(NO)
+       FROM TBL_NOTICES
+       WHERE 1=1
+       
+    <include refid="search3"></include>   
+       AND NO > 0
+ </select>
+ 
+ <sql id="search3">
+    <if test="searchType != null">
+       <if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'c'.toString()">AND CONTENTS LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'w'.toString()">AND HEADER LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENTS LIKE '%' || #{keyword} || '%')</if>
+    </if>
+ </sql>
+ 
+ 
+	
+	<!-- 공지사항 등록 -->
+	<insert id="noticesS" useGeneratedKeys="true" keyColumn="NO" keyProperty="no" parameterType="kr.co.vo.AdminNoticesVO">
+	insert into tbl_notices (NO, TITLE,HEADER,NOTICEDATE, HIT,CONTENTS)
+            values (tbl_notices_seq.nextval, #{title},#{header},sysdate, 0 ,#{contents})
+	</insert>
+	
+	    <!-- 게시판 조회수 -->
+    <update id="noticesHit" parameterType="int">
+       UPDATE tbl_notices SET
+       HIT = HIT+1
+       WHERE no = #{no}
+    </update>
+  	<update id="noticesUE" parameterType="kr.co.vo.AdminNoticesVO">
+      UPDATE tbl_notices
+         SET 	HEADER   =   #{header},
+       		    TITLE    =   #{title},
+               CONTENTS  =   #{contents}
+       WHERE NO = #{no} 
+   </update>
+	
+	<!-- 공지사항 첨부파일 업로드 -->
+    <insert id="insertFile" parameterType="hashMap">
+		INSERT INTO TBL_FILE(
+			FILE_NO,
+			NO,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			SEQ_TBL_FILE_NO.NEXTVAL,
+			#{NO},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+      <!-- 첨부파일 조회 -->
+    <select id="selectFileList" parameterType="int" resultType="hashMap">
+    	SELECT FILE_NO,
+    		   ORG_FILE_NAME,
+    		   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
+    		   DEL_GB
+    	  FROM TBL_FILE
+    	 WHERE NO = #{NO}
+    	   AND DEL_GB = 'N'
+    	 ORDER BY FILE_NO ASC
+    </select>
+    
+    <!-- 공지사항 상세 조회 -->	
+    <select id="noticesR" resultType="kr.co.vo.AdminNoticesVO">
+		SELECT   NO,TITLE, CONTENTS,HEADER
+		  FROM TBL_NOTICES
+		 WHERE NO = #{no}
+	</select> 
+	
+	
+	  <!-- 첨부파일 다운 -->
+    <select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+       SELECT 
+          STORED_FILE_NAME,
+          ORG_FILE_NAME
+       FROM TBL_FILE
+       WHERE FILE_NO = #{FILE_NO}
+    </select>
+    
+    <!-- 첨부파일 수정 -->
+    <update id="updateFile" parameterType="hashMap">
+       UPDATE TBL_FILE SET
+       DEL_GB = 'Y'
+       WHERE FILE_NO = #{FILE_NO}
+    </update>
+    
+    <!-- 기업 리스트 -->
+	<select id="companyList" resultType="kr.co.vo.MemberVO" parameterType="kr.co.vo.SearchCriteria">
+    SELECT userid,username,birth,phone,gender,email
+     FROM
+     (SELECT userid,username,birth,phone,gender,email,ROW_NUMBER() OVER(ORDER BY VERIFY DESC) AS RNUM
+             FROM MP_MEMBER
+             WHERE VERIFY = 0
+
+                <include refid="search4"></include>
+                           ) MP_MEMBER
+    WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+    ORDER BY userid DESC
+ </select>
+ 
+ <select id="listCount4" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+    SELECT COUNT(verify)
+       FROM MP_MEMBER
+       WHERE VERIFY=9
+       
+    <include refid="search4"></include>   
+  
+ </select>
+ 
+ <sql id="search4">
+    <if test="searchType != null">
+       <if test="searchType == 't'.toString()">AND userid LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'c'.toString()">AND username LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'w'.toString()">AND phone LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'tc'.toString()">AND (userid LIKE '%' || #{keyword} || '%') or (username LIKE '%' || #{keyword} || '%')</if>
+    </if>
+ </sql>
+ 
+   
+     <!-- 기업 탈퇴
+   <delete id="memberDelete" parameterType="string">
+      delete
+      from 
+            MP_MEMBER
+      where USERID = #{userId}
+   </delete> -->
+   
+   
+   
+	<!-- 회원 리스트 -->
+	
+	<select id="memberList" resultType="kr.co.vo.MemberVO" parameterType="kr.co.vo.SearchCriteria">
+    SELECT userid,username,birth,phone,gender,email
+     FROM
+     (SELECT userid,username,birth,phone,gender,email,ROW_NUMBER() OVER(ORDER BY VERIFY DESC) AS RNUM
+             FROM MP_MEMBER
+             WHERE VERIFY =1
+
+                <include refid="search1"></include>
+                           ) MP_MEMBER
+    WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+    ORDER BY userid DESC
+ </select>
+ 
+ <select id="listCount1" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+    SELECT COUNT(verify)
+       FROM MP_MEMBER
+       WHERE VERIFY=1
+       
+    <include refid="search1"></include>   
+       
+ </select>
+ 
+ <sql id="search1">
+    <if test="searchType != null">
+       <if test="searchType == 't'.toString()">AND userid LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'c'.toString()">AND username LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'w'.toString()">AND phone LIKE '%' || #{keyword} || '%'</if>
+       <if test="searchType == 'tc'.toString()">AND (userid LIKE '%' || #{keyword} || '%') or (username LIKE '%' || #{keyword} || '%')</if>
+    </if>
+ </sql>
+ 
+   
+     <!-- 회원 탈퇴 -->
+   <delete id="memberDelete" parameterType="string">
+      delete
+      from 
+            MP_MEMBER
+      where USERID = #{userId}
+   </delete>
+   <!-- 게시판 리스트
+	<select id="boardList" resultType="kr.co.vo.BoardVO">
+	 	SELECT * FROM MP_BOARD
+	</select>
+	 -->
+	<!-- 게시파 상세 조회 -->
+		<select id="boardListR" parameterType="int" resultType="kr.co.vo.BoardVO">
+		SELECT * FROM MP_BOARD
+		 WHERE BNO = #{bno}
+	</select>   
+	
+	<!--  게시판 페이징 -->
+	<select id="boardList" resultType="kr.co.vo.BoardVO" parameterType="kr.co.vo.SearchCriteria">
+      SELECT  BNO,
+            HEADER, 
+              TITLE, 
+              CONTENT,
+              WRITER, 
+              REGDATE,
+              HIT,
+              reply_cnt
+       FROM ( 
+              SELECT BNO,
+                    HEADER, 
+                     TITLE, 
+                     CONTENT, 
+                     WRITER, 
+                     REGDATE,
+                     HIT, 
+                     reply_cnt,
+                     ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+               FROM MP_BOARD
+               WHERE 1=1 AND bno>0
+                  <include refid="search"></include>
+                             ) MP
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      ORDER BY BNO DESC
+   </select>
+   
+   <select id="listCount" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+      SELECT COUNT(BNO)
+         FROM MP_BOARD
+         WHERE 1=1
+         
+      <include refid="search"></include>   
+         AND BNO > 0
+   </select>
+   
+   <sql id="search">
+      <if test="searchType != null">
+         <if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+         <if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+         <if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+         <if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+      </if>
+   </sql>
+
+      <!-- 상품  삭제 -->
+   <delete id="boardListD" parameterType="int">
+      delete
+      from
+            MP_BOARD
+      where bno = #{bno}
+   </delete>
+    <!-- 상품  삭제 -->
+   <delete id="noticesD" parameterType="int">
+      delete
+      from
+            tbl_notices
+      where no = #{no}
+   </delete>
+         <!--  qna 게시글 삭제 -->     
+    <delete id="qnaDelete" parameterType="int">
+      DELETE 
+        FROM QNA_BOARD
+       WHERE BNO = #{bno}
+   </delete>
+</mapper>
+

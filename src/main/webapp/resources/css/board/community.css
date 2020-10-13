@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+}
+
+.halfback {
+    background-image: url(../final_20200605_/assets/images/halfback.jpg);
+    height: 380px;
+    position: relative;
+    opacity: 0.45;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.quotes {
+    /* width: 80vw; */
+    min-height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+
+.quotes .content {
+    position: relative;
+    /* width: 25vw; */
+    height: 50vh;
+    min-height: 320px;
+    /* background: #f2f2f2; */
+    overflow: hidden;
+    transition: all 0.5s ease-in;
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: -10px 25px 50px #BBC7BA;
+}
+
+.quotes .content::before {
+    content: '\201C';
+    position: absolute;
+    top: -20px;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    font-size: 120px;
+    opacity: 0.2;
+    /* background: transparent; */
+    pointer-events: none;
+}
+
+
+.quotes .content::after {
+    content: '\201D';
+    position: absolute;
+    bottom: -10%;
+    right: 5%;
+    font-size: 120px;
+    opacity: 0.2;
+    background: transparent;
+    filter: invert(1);
+    pointer-events: none;
+}
+
+
+.quotes .content p {
+    margin: 0;
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.quotes .content:hover {
+color: #f2f2f2;
+box-shadow: 20px 50px 100px #EDEAE8;
+}
+
+.quotes .content:hover,
+.quotes .content:hover~.bg {
+opacity: 1;
+background: #e2a9e5;
+background: -moz-linear-gradient(-45deg, #F9D5D3 15%, #CCCACA 100%);
+background: -webkit-linear-gradient(-45deg, #F9D5D3 15%,#CCCACA 100%);
+background: linear-gradient(135deg, #F9D5D3 15%, #CCCACA 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F9D5D3', endColorstr='#99A89E',GradientType=1 );
+}
+
+
+/* 여기까지 효과 */
+
+body{
+ 	background-color: white;
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.one {
+    border-bottom: 2.5px solid #BBC7BA;
+    /* margin-top: 50px; */
+    margin-bottom: 50px;
+}
+
+/* Center website */
+.main {
+    margin: 0;
+}
+
+h1 {
+    font-size: 45px;
+    word-break: break-all;
+    font-weight: bolder;
+    color: #807F89;
+}
+
+h2 {
+    color: #ECA4A6;
+    font-weight: bold;
+    
+}
+
+h3
+{
+    text-align: center;
+    font-weight: bold;
+    color: #99A89E;
+}
+h5{
+    line-height: 150%;
+    font-weight: bold;
+    font-size: medium;
+    
+}
+.row {
+    margin: 2px -16px;
+    /* text-align: center; */
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row>.col-sm-4 {
+    padding: 1px;
+}
+
+/* Create four equal columns that floats next to each other */
+.col-sm-4 {
+    float: left;
+    width: 30%;
+}
+
+/* Clear floats after rows */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Content */
+.content {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+    .col-sm-4 {
+        width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-sm-4 {
+        width: 100%;
+    }
+}

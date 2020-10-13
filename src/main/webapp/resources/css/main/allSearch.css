@@ -1,0 +1,75 @@
+input{
+  width: 700px;
+  height: 50px;
+  /* font-size: 20px; */
+  /* text-align: center; */
+}
+
+.searchBar{
+  margin-top: 20px;
+  text-align: center;
+}
+
+button{
+  /* padding-top: 10px;
+  padding-bottom: -40px; */
+  width: 50px;
+  height: 50px;
+}
+
+.searchbarText{
+  margin-top: 20px;
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: large;
+}
+.searchbarText p{
+  display: inline-block;
+}
+#red{
+  color: #a63030;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.boxContents img{
+	width: 200px;
+	height: 150px;
+	margin-top: 25px;
+}
+
+.contents{
+  border-top: 2px solid black;
+}
+
+.line{
+  border-bottom: 0.7px solid rgb(184, 184, 184);
+  height: 200px;
+  text-decoration: none;
+}
+
+.line2{
+	border-bottom: 0.7px solid rgb(184, 184, 184);
+	height: 110px;
+	text-decoration: none;
+}
+
+.line h3, .line2 h3{
+  color: black;
+}
+
+.line p, .line2 p{
+  color: #777;
+}
+
+.pull-right{
+  margin: 30px 0;
+}
+
+.pull-right a{
+  color: #957963;
+}
+
+.col-sm-9{
+	margin-top: 45px;
+}

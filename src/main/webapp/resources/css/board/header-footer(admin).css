@@ -1,0 +1,78 @@
+body {
+    font-family: "나눔스퀘어", sans-serif;
+  }
+
+  /* header */
+  #admin{
+    float: right;
+    width: 30px;
+    margin: 50px 8px 0 0;
+  }
+  .loginbtn,
+  .joinbtn {
+    background-color: #99A89E;
+    margin: 50px 8px 0 0;
+    width: 70px;
+    padding: 6px;
+    color: white;
+    font-size: small;
+    text-align: center;
+  }
+
+  /* navbar */
+  .marginSm{
+    margin-bottom: -20px;
+  }
+  .navbar {
+    background-color: #D7DBD1;
+    border: #807F89;
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .navbar-inverse .navbar-toggle {
+    background-color: #99A89E;
+    border-color: #99A89E;
+  }
+
+  .navbar-inverse .navbar-form,
+  .navbar-inverse .navbar-collapse {
+    border-color: white;
+  }
+
+  .headerSearch1 {
+    width: 30%;
+  }
+
+  .headerSearch1,
+  .headerSearch2,
+  .headerSearch3 {
+    display: inline-block;
+  }
+
+  .headerSearch2,
+  .headerSearch3 {
+    background-color: #99A89E;
+    border: 0;
+  }
+
+  /* footer */
+  .footer {
+    background-color: #D7DBD1;
+    padding: 20px 10px;
+  }
+
+  #phoneNumber {
+    font-weight: bold;
+    font-size: x-large;
+    float: right;
+    margin-left: 10px;
+  }
+
+  #phoneImage {
+    color: #ECA4A6;
+    font-weight: bold;
+    font-size: x-large;
+    float: right;
+  }
+  

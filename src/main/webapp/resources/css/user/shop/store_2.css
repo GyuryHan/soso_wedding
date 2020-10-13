@@ -1,0 +1,250 @@
+    /* 상단 index 9개*/
+    .indexIcon {
+        background-color: #F6F6F6;
+        border-bottom: 1px solid #EDEDED;
+        text-align: center;
+      }
+    
+      div.col-xs-12.col-sm-4 {
+        padding: 5px 0;
+      }
+    
+      .icon {
+        display: inline-block;
+        color: #8C8C8C;
+        font-weight: 700;
+      }
+    
+      .icon p{
+        margin: 0;
+      }
+    
+      .indexIcon a {
+        display: inline-block;
+      }
+    
+      .indexIcon img{
+        width: 75px;
+        height: 75px;
+      }
+    
+      #pink {
+        color: #ECA4A6;
+      }
+     
+      /* 상품검색 */
+      .KategorieSearch{
+        margin-bottom: 20px;
+        margin: 50px 0px 25px 0;
+      }
+    
+      #select1, #select2 {
+        display: inline-block;
+        width: 120px;
+        height: 40px;
+        padding-left: 6px;
+        border: 1px solid #DFDFDF;
+        font-weight: 400;
+        color: gray;
+        font-size: 15px;
+      }
+    
+      #select2{
+        margin-left: 6px;
+      }
+    
+      #select3{
+        display: inline-block;
+      } 
+    
+      #select4{
+        width: 230px;
+        height: 41px;
+        margin-left: 6px;
+        padding-left: 10px;
+        padding-right: 20px;
+        border: 1px solid #DFDFDF;
+        font-weight: 400;
+        font-size: 15px;
+      }
+    
+      #select5{
+        position: absolute;
+        top: 15%;
+        margin-left: -41px;
+        border: 0;
+      }
+    
+      .glyphicon-search2{
+        color: gray;
+      }
+    
+      /* 상품목록 */
+      .boxContents {
+        margin-bottom: 20px;
+      }
+    
+      .boxContents img {
+        width: 100%;
+      }
+    
+      .contents h4 {
+        height: 40px;
+        margin-top: 18px;
+        margin-bottom: -15px;
+      }
+    
+      .contents h3 {
+        margin-top: 3px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #262626;
+        margin-top: 15px;
+        margin-bottom: 30px;
+      }
+    
+      .contents p {
+        display: inline;
+        font-weight: 400;
+        color: #8c8c8c;;
+      }
+    
+      #brown {
+        font-weight: bold;
+        color: #a59588;
+        margin-right: 3px;
+      }
+    
+      /* 페이지네이션 */
+      .indexpagination {
+        margin-top: 20px;
+        color: #ECA4A6;
+      }
+      
+      .paginationSize{
+        text-align: center;
+        margin-top: 30px;
+      }
+    
+      .pagination>li>a {
+        color: #ECA4A6;
+        font-weight: bold;
+      }
+    
+      .pagination>li>a:hover, .pagination>.active>a:focus, .pagination>.active>a:visited, .pagination>.active>a {
+        color: #ffffff;
+        background-color: #ECA4A6;
+        border-color: #ECA4A6;
+      }
+    
+      /* 반응형 */
+      @media (max-width: 767px) {
+    
+        /* 상단 index 9개*/
+        .icon {
+          margin: -10px 5%;
+        }
+    
+        .indexIcon a {
+          padding-top: 15px;
+        }
+    
+        /* 상품목록 */
+        .KategorieSearch{
+          margin-bottom: 20px;
+          margin: 30px 0px 10px 0;
+        }
+    
+        .boxContents img {
+          height: 180px;
+        }
+    
+        .contents h4{
+          font-size: 1.1em;
+        }
+    
+        #select1, #select2 {
+          width: 100px;
+          font-size: 12px;
+          margin-left: 0;
+        }
+    
+        #select4{
+          width: 135px;
+          font-size: 12px;
+          margin-left: 0;
+        }  
+    
+        #select5{
+          top: 10%;
+        }
+    
+        /* 페이지네이션  */
+        .pagination>li>a {
+          text-align: center;
+          margin-left: 0;
+          padding: 3px;
+          width: 25px;
+        }
+    
+      }
+    
+      @media (min-width:768px) {
+    
+         /* 상단 index 9개*/
+        /* div.col-xs-12.col-sm-4 {
+          width: 33%;
+        } */
+    
+        .icon {
+          width: 60px;
+        }
+    
+        .icon img{
+          width: 60px;
+          height: 65px;
+        }
+    
+        /* 상품목록 */
+        .boxContents img {
+          height: 210px;
+        }
+    
+        .icon{
+          margin: 8px;
+          font-size: 13px;
+        }
+    
+      }
+    
+      @media (min-width: 992px) {
+    
+        .icon{
+          margin: 20px;
+        }
+    
+         /* 상품목록 */
+         .boxContents img {
+          height: 270px;
+        }
+    
+      
+      }
+    
+      @media(min-width: 1200px) {
+    
+       /* 상단 index 9개*/
+        .icon {
+          width: 75px;
+          margin: 23px;
+        }
+    
+        .indexIcon img{
+          height: 75px;
+          width: 75px;
+        }
+    
+        .icon{
+          font-size: 15px;
+        }
+      }

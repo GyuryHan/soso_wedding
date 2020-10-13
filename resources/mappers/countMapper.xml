@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="countMapper">
+           <insert id="insertVisitor" parameterType="kr.co.vo.VisitorCountVO">
+            INSERT INTO TBL_VISITOR(COUNT,IP,IPDATE)
+            VALUES (VISITOR_SEQ.nextval, #{ip}, TO_DATE(SYSDATE, 'yy/MM/dd'))
+        </insert>
+        
+        <select id="getVisitorCount" resultType="kr.co.vo.VisitorCountVO">
+         SELECT  DISTINCT ipdate,count(DISTINCT ip)as count
+		 FROM tbl_visitor  
+		 group by ipdate
+		 ORDER BY IPDATE asc
+		 
+        </select>
+        <select id="getGenderCount" resultType="kr.co.vo.MemberVO">
+        SELECT  GENDER as gender,count(gender) AS count
+		FROM mp_member
+		group by gender
+        </select>
+        <select id="getTodayCount" resultType="int">
+      	SELECT  count(DISTINCT ip) as ip
+		FROM tbl_visitor  
+		WHERE IPDATE =  trunc(SYSDATE)
+		GROUP BY ipdate
+		ORDER BY IPDATE DESC
+       
+        </select>
+      <!-- 일별
+        SELECT  DISTINCT ipdate,count(DISTINCT ip),ip
+		FROM tbl_visitor  
+		WHERE TO_CHAR(IPDATE,'YY/MM/DD') = TRUNC(SYSDATE)
+		group by ipdate,ip
+		ORDER BY IPDATE DESC; 
+	 -->
+        <!--  백업
+        SELECT ipdate,count(*) as count
+		FROM  tbl_visitor
+		GROUP by ipdate
+		order by ipdate desc -->
+	
+		<select id="getMemberCount" resultType="int">
+		SELECT count(VERIFY)
+		FROM MP_MEMBER
+		where VERIFY = 0
+		</select>
+		<select id="getCompanyCount" resultType="int">
+		SELECT count(VERIFY)
+		FROM MP_MEMBER
+		where VERIFY = 1
+		</select>          
+		<select id="getToalMoneyCount" resultType="int">
+		SELECT sum(amount) FROM TBL_ORDER
+		</select>          
+		<select id="getMoneyCount" resultType="kr.co.vo.MoneyVO">
+		SELECT sum(amount) money,ORDERDATE 
+		FROM tbl_order
+		group by ORDERDATE
+		order by ORDERDATE asc
+		</select>          
+</mapper>
+
+		

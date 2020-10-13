@@ -1,0 +1,467 @@
+.goods{
+	background: url(/resources/images/admin/register/icon_menu_goods.png) center 0px no-repeat;
+}
+body {
+	font-family: '맑은 고딕', verdana;
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+div#root {
+	width: 100%;
+	margin: 0 auto;
+}
+
+header#header {
+	font-size: 60px;
+	padding: 20px 0;
+	background: #333;
+}
+
+header#header h1 a {
+	color: #fff;
+	font-weight: bold;
+}
+
+nav#nav {
+	padding: 10px;
+	text-align: right;
+	background: #333;
+	padding-right: 20px;
+}
+
+nav#nav ul li {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+nav#nav ul li a {
+	color: #f1f1f1;
+}
+
+section#container {
+	padding: 0;
+	border-bottom: 1px solid #cfcfcf;
+	background-color:#fcfcfc;
+	
+}
+
+
+section#container::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+aside {
+position: relative;
+background: #fcfcfc;
+	float: left;
+	width: 200px;
+	
+}
+
+div#container_box {
+height:100%;
+position: relative;
+left:200;
+background-color:#fff;
+	padding-left:30px;
+	padding-bottom:40px;
+	float: left;
+	width: calc(100% - 200px);
+	border-left:1px solid #cfcfcf;
+}
+
+/*목록 높이정렬*/
+div#container_box2 {
+height:auto;
+position: relative;
+left:200;
+background-color:#fff;
+	padding-left:30px;
+	padding-bottom:40px;
+	float: left;
+	width: calc(100% - 200px - 20px);
+	border-left:1px solid #cfcfcf;
+}
+
+aside ul {
+	width: 200px;
+	padding: 10px 0 10px 0;
+}
+
+aside ul li {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+aside ul li a {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+	color: #666;
+}
+
+aside ul li a:hover {
+	color: #666;
+}
+
+footer#footer {
+	background: #f9f9f9;
+	padding: 20px;
+}
+
+footer#footer ul li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.inputArea {
+	margin: 10px 0;
+}
+
+select {
+	width: 100px;
+}
+
+label {
+	display: inline-block;
+	width: 100px;
+	padding: 5px;
+}
+
+label[for='gdsDes'] {
+	display: block;
+}
+
+input[type=text] {
+	width: 800px;
+}
+
+input {
+	width: 100px;
+}
+
+textarea#gdsDes {
+	width: 400px;
+	height: 180px;
+}
+
+.select_img img {
+	margin: 10px 0px 30px 0;
+}
+
+.select_img img {
+	margin: 0px 0px 10px 0;
+}
+
+/*header*/
+.title {
+	padding-left: 30px;
+}
+
+.inputArea #sample2_address {
+	width: 230px;
+}
+
+.inputArea #sample2_detailAddress {
+	width: 280px;
+}
+
+.inputArea #sample2_extraAddress {
+	display: none;
+}
+
+.goods_text {
+	padding: 52px 0px 10px 0px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.goods_text_2 {
+	font-weight: bold;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #888;
+	margin-bottom: 20px;
+}
+
+.menu-fixed{
+	font-weight: bold;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #888;
+    position: fixed;
+    top: 0px;
+    left: 201px;
+    width: 100%;
+    padding-left: 30px;
+    background: #fff;
+    padding-top: 20px;
+    margin: 0;
+    z-index:999;
+	
+}
+
+.li_title {
+	background: #6E7074 url(/resources/images/company/icon_minus.png) 172px 50% no-repeat;
+    height: 45px;
+    line-height: 3.2em;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.li_content {
+	
+    height: 35px;
+    
+	
+	text-align: left;
+	padding-left: 20px;
+}
+
+.li_title span {
+	color: #fff;
+	font-weight: 600;
+}
+
+.table_title {
+	margin: 0 0 7px;
+	color: #222222;
+	font-size: 16px;
+	letter-spacing: -1px;
+	font-weight: bold;
+}
+
+
+
+.table_box {
+	border-top: 1px solid #888888;
+	width: 100%;
+	margin-bottom:40px;
+	
+}
+
+.tb_mb{
+	margin-bottom:50px;
+}
+.table_box th {
+	background-color: #F6F6F6;
+	height: 85px;
+	padding: 8px 20px;
+	font-size: 13px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.table_box td {
+	border-bottom: 1px solid #e6e6e6;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+.td_sec {
+	padding-left: 20px;
+}
+
+.btn-black {
+	background-image: none;
+	background-color: #666666;
+	text-shadow: none;
+	color: #FFFFFF;
+	border-color: #666666;
+	font-weight: bold;
+}
+.btn-reg{
+width:70px;
+background-image: none;
+	background-color: #666666;
+	text-shadow: none;
+	color: #FFFFFF;
+	border-color: #666666;
+	font-weight: bold;
+	border: none;
+	border-radius: inherit;
+	font-size: 13px;
+	margin-left: 5px;
+	padding: 8px 0 8px 0;
+}
+
+.btn-reg:hover{
+color:#fff;
+background:#444;
+}
+.bt_lt {
+	border-left: 1px solid #e6e6e6;
+	text-align: center;
+}
+
+.pl {
+	margin-left: 100px;
+}
+
+.btn input:hover {
+	color: #fff;
+}
+
+#btn_category_select {
+	font-size: 13px;
+	border-radius: inherit;
+}
+
+#btn_category_select:hover {
+	color: #fff;
+	background: #444;
+}
+
+.inputArea select {
+	border-color: #d5d5d5;
+	padding: 3px;
+}
+
+.inputArea input {
+	border: 1px solid #d5d5d5;
+	outline: none;
+	padding: 3px;
+}
+
+em {
+	color: red;
+	font-weight: bold;
+}
+/*주소버튼*/
+.btn-address {
+	background-image: none;
+	background-color: #666666;
+	text-shadow: none;
+	color: #FFFFFF;
+	border-color: #666666;
+	font-weight: bold;
+	border: none;
+	border-radius: inherit;
+	font-size: 12px;
+	margin-left: 5px;
+}
+
+.btn-address:hover {
+	color: #fff;
+	background: #444;
+}
+/*카테고리 select 가운데 정렬*/
+.la_ta {
+	text-align: center;
+}
+
+/*input width값 조절*/
+#gdsPrice {
+	width: 120px;
+}
+
+#gdsStock {
+	width: 120px;
+}
+
+#comSubway {
+	width: 120px;
+}
+
+#comArea {
+	width: 120px;
+}
+
+#h_type {
+	width: 200px;
+}
+
+#oddnum {
+	width: 120px;
+}
+
+#seat {
+	width: 120px;
+}
+
+#w_type {
+	width: 200px;
+}
+
+#m_menu {
+	width: 200px;
+}
+
+#m_cost {
+	width: 120px;
+}
+
+/*count 글자수 조절*/
+#counter {
+	color: #666;
+	font-weight: bold;
+	padding-left: 4px;
+}
+
+/*상품소개 width*/
+.gdsDes {
+	width: 95%;
+}
+
+/*file-upload 버튼*/
+input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox label {
+	width:120px;
+	text-align:center;
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+.filebox2 label {
+	width:120px;
+	text-align:center;
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+/*메뉴바 scroll*/
+#scroll{
+	position: absolute;
+    top: 0px;
+    right: 0;
+-webkit-transition: all 0.5s;
+-moz-transition: all 0.5s;
+-ms-transition: all 0.5s;
+-o-transition: all 0.5s;
+transition: all 0.5s;
+    
+}

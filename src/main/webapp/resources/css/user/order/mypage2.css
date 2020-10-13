@@ -1,0 +1,341 @@
+.all_wrap {
+    margin-top: 70px;
+}
+
+.nav-pills>li>a, .nav-pills>li>a:hover, .nav-pills>li>a:active, .nav-pills>li>a:active:focus {
+    background-color: #ffffff;
+    color: #8c8c8c;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:active, .nav-pills>li.active>a:focus {
+    background-color: #ffffff;
+    color: #262626;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.side_wrap h2 {
+    font-weight: 1000;
+    margin-bottom:  40px;
+}
+
+/* 우측컨텐츠 */
+
+.rightWrap h3{
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.topBox h4, .topBox p {
+    display: inline-block;
+}
+
+.topBox {
+    border: 5px solid #eff0f2;
+    padding: 12px 20px;
+}
+
+.topBox h4 {
+    width: 90px;
+    font-weight: 700;
+    color: #20232c;
+}
+
+.topBox p {
+    font-size: 20px;
+    color: #eca4a6;
+    margin: 4px 0;
+    font-weight: 500;
+}
+
+.orderDate {
+    display: inline-block;
+    width: 230px;
+}
+
+.orderDate p {
+    padding-right: 25px;
+    border-right: 2px solid #eff0f1;
+}
+
+.orderNum {
+    display: inline-block;
+}
+
+.rightWrap {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 주문상품 */
+
+.odTitle {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 50px 0 10px;
+}
+
+.orderTable {
+    border-bottom: 1px solid #dddde1;
+}
+
+.orderTable th {
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #383d4a;
+    color: #20232c;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.orderTable td {
+    border-top: 1px solid #dddde1;
+    padding: 15px 0;
+    color:  #20232c;
+    font-size: 13px;
+}
+
+.productDescription {
+    width: 340px;
+    display: inline-block;
+}
+
+.productDescription img {
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+
+.productPrice, .compayInfo {
+    width: 200px;
+    text-align: center;
+}
+
+.payComplete, .payCancel {
+    width: 100px;
+    text-align: center;
+}
+
+.payComplete {
+    border-right: 1px solid #dddde1;
+}
+
+.names {
+    width: 250px;
+    padding-left: 20px;
+    display: inline-block;
+    font-size: 12px;
+    color: #adb1b8;
+}
+
+.names p {
+    margin: 5px 0;
+}
+
+.productName {
+    font-size: 13px;
+    color: #20232c;
+}
+
+#gray {
+    color: #9194a1;
+}
+
+.thPay, .payComplete, .payCancel {
+    background-color: #f7f7f7;
+}
+
+.btn-cancel, .btn-cancel:hover, .btn-cancel:focus {
+    background-color: #f7f7f7;
+    border-color: #ccc;
+    color: #20232c;
+    padding: 3px 10px;
+    font-size: 13px;
+}
+
+
+/* 결제정보 */
+
+.orderInfo {
+    border-top: 1px solid #383d4a;
+    padding: 10px 20px;
+    background-color: #f7f7f7;
+}
+
+.orderInfo ul {
+    display: inline-block;
+    width: 60%;
+}
+
+.orderInfo li {
+    line-height: 2;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.orderInfo span {
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.orderInfoRight {
+    background-color: #f5e1da;
+    width: 40%;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: -10px;
+    height: 85px;
+    margin-right: -20px;
+    text-align: center;
+    padding: 25px 0;
+}
+
+.orderInfoRight span {
+    font-size: 21px;
+    font-weight: 900;
+}
+
+/* 배송정보 */
+
+.deliveryInfo {
+    border-top: 1px solid #383d4a;
+    border-bottom: 1px solid #dddde1;
+    margin-bottom: 100px;
+}
+
+.deliveryInfo h5, .deliveryInfo p {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 35px;
+}
+
+.deliveryInfo h5 {
+    background-color: #f7f7f7;
+    width: 90px;
+    font-weight: 500;
+    color: #20232c;
+    padding-left: 15px;
+    margin: 0;
+}
+
+.deliveryInfo p {
+    margin: 0;
+    color: #565960;
+    font-weight: 400;
+    padding-left: 15px;
+}
+
+
+ /* 모달 */
+
+ .modal .btn-primary {
+     background-color: #f5e1da;
+     border-color: #ccc;
+     color: #20232c;
+ }
+
+ .modal-header {
+     height: 45px;
+     /* border: 0; */
+ }
+
+ .modal-body {
+    height: 80px;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 30px 15px;
+ }
+
+ .modal-footer {
+     height: 50px;
+     padding: 8px 15px;
+ }
+
+@media (max-width: 767px) {
+
+.all_wrap {
+    margin-top: 0;
+}
+
+.nav-pills>li>a, .nav-pills>li.active>a {
+    background-color: #f5e1da;
+    border: 1px solid #dfdddd;
+    color: #8c8c8c;
+    font-weight: 600;
+}
+
+.side_wrap h2 {
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.rightWrap h3 {
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.odTitle {
+    margin-top: 20px;
+}
+
+.productDescription {
+    width: 140px;
+}
+
+.productDescription img {
+    margin-left: 0;
+}
+
+.names {
+    padding-left: 0;
+}
+
+.orderTable th, .orderTable td, .productName {
+    font-size: 11px;
+    letter-spacing: -0.5px;
+}
+
+.productPrice {
+    width: 160px;
+}
+
+.orderInfoRight {
+    padding: 20px 10px 0 0;
+}
+
+.orderInfoRight span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btn-cancel {
+    font-size: 10px;
+    padding: 2px;
+}
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+   
+    .productDescription {
+        width: 180px;
+    }
+
+    .productDescription img {
+        margin-left: 20px;
+    }
+
+    .orderTable th, .orderTable td, .productName {
+        font-size: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .btn-cancel {
+        font-size: 11px;
+        padding: 3px;
+    }
+}

@@ -1,0 +1,184 @@
+body {
+   font-family: 'NanumSquare', sans-serif;
+   padding-top: 73px;
+  }
+
+  a{
+    text-decoration: none;
+  }
+  a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+.pull-right{
+ /* height: 74px; */
+ padding: 25px 20px;
+ margin: 0;
+}
+
+.pull-right a{
+  margin-left: 15px;
+}
+
+.login:hover{
+  color: #ECA4A6;
+}
+
+  .login{
+  color: #777;
+  letter-spacing: 0;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  height: 50px;
+  }
+ /* navbar */
+
+ .headerSearch1{
+ padding: 0;
+ }
+.navbar-default {
+  /* background-color: #F8F8F8; */
+  opacity: 0.9;
+  background-color: white;
+  border-color: #E7E7E7;
+  font-size: large;
+  height: 74px;
+  /* margin-top: 60px; */
+}
+/* .navbar-default img{
+  padding: 0;
+  margin: 0;
+} */
+.navbar-default .navbar-nav > li:first-child > a {
+  padding: 0;
+  margin-right: 20px;
+  margin: 0;
+}
+.navbar-default img{
+  height: 70px;
+}
+
+/* link */
+.navbar-default .navbar-nav > li > a {
+  color: black;
+  font-weight: 700;
+  padding: 0;
+  margin: 25px 25px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #333;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #555;
+  background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #555;
+  background-color: #D5D5D5;
+}
+
+/* mobile version */
+.navbar-default .navbar-toggle {
+  border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #CCC;
+}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+      color: #777;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+      color: #333;
+  }
+}
+  /* header */
+ 
+  /* .loginbtn,
+  .joinbtn {
+    background-color: #f7ede9;
+    margin: 50px 8px 0 0;
+    width: 70px;
+    padding: 6px;
+    color: black;
+    font-size: small;
+    text-align: center;
+  } */
+ 
+  /* .pull-right{
+    height: 49px;
+  } */
+ 
+
+  /* margin-left: 20px;
+  margin-right: 30px; */
+
+  /* navbar */
+  .marginSm{
+    height: inherit;
+    /* margin-bottom: -20px; */
+  }
+  
+
+
+  .headerSearch1 {
+    /* background-color: #7777; */
+    color: black;
+    border: 0;
+  }
+
+  /* footer */
+  .footer {
+    background-color: #f7f7f7;
+    padding: 20px 10px;
+  }
+
+  #phoneNumber {
+    font-weight: bold;
+    font-size: x-large;
+    float: right;
+    margin-left: 10px;
+  }
+
+  #phoneImage {
+    color: #ECA4A6;
+    font-weight: bold;
+    font-size: x-large;
+    float: right;
+  }
+  
+  /* 반응형 */
+  @media (max-width: 767px) {
+
+    /* header */
+    .loginbtn,
+    .joinbtn {
+      margin: 50px 3px 0 0;
+      width: 65px;
+      padding: 6px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .navbar-form .form-control{
+      width: 120px;
+    }
+
+  }
+
+  @media (min-width: 992px) {
+    .navbar-form .form-control{
+      width: auto;
+    }
+
+  }
