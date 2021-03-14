@@ -1,7 +1,7 @@
 # soso_wedding
 This is our team project_wedding shopping mall
 
-시연영상 및 맡은역할 확인하기:
+<h2 align="center"> 시연영상 및 맡은역할 확인하기:
 [소소웨딩 PPT.pptx](https://github.com/GyuryHan/soso_wedding/files/6127249/PPT.pptx)
 
 ![상품페이지](https://user-images.githubusercontent.com/66048317/111075267-86b40f00-852a-11eb-93ff-56592946884a.jpg)
